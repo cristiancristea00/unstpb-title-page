@@ -1,5 +1,5 @@
 .ONESHELL:
-build: options title clean
+build: options ro clean
 
 options:
 	$(info Opțiuni:
@@ -19,7 +19,7 @@ options:
 	FSA - Facultatea de Științe Aplicate
 	FT - Facultatea de Transporturi)
 
-title:
+ro:
 	@read -p "Alege facultatea: " faculty;
 	@read -p "Tip: " docType;
 	@read -p "Disciplină: " subject;
