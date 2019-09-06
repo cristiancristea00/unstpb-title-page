@@ -27,7 +27,7 @@ title:
 	@read -p "Prenume: " firstName;
 	@read -p "Nume: " lastName;
 	@read -p "Grupă: " group;
-	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/$$faculty.tex}"
+	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/RO/$$faculty.tex}"
 
 clean:
 	rm -f *.log *.aux
