@@ -1,7 +1,22 @@
 .ONESHELL:
-build: options ro clean
+error:
+	@echo "You haven't selected a language for the document!"
+	@echo "Usage: make RO/EN/FR/DE"
 
-options:
+RO: selectRO
+	@rm -f *.log *.aux
+
+selectRO: facRO
+	@read -p "Alege facultatea: " faculty;
+	@read -p "Tip: " docType;
+	@read -p "Disciplină: " subject;
+	@read -p "Titlu: " title;
+	@read -p "Prenume: " firstName;
+	@read -p "Nume: " lastName;
+	@read -p "Grupă: " group;
+	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/RO/$$faculty.tex}"
+
+facRO:
 	$(info Opțiuni:
 	FAIMA - Facultatea de Antreprenoriat, Ingineria și Managementul Afacerilor
 	FAC - Facultatea de Automatică și Calculatoare
@@ -19,15 +34,3 @@ options:
 	FSA - Facultatea de Științe Aplicate
 	FT - Facultatea de Transporturi)
 
-ro:
-	@read -p "Alege facultatea: " faculty;
-	@read -p "Tip: " docType;
-	@read -p "Disciplină: " subject;
-	@read -p "Titlu: " title;
-	@read -p "Prenume: " firstName;
-	@read -p "Nume: " lastName;
-	@read -p "Grupă: " group;
-	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/RO/$$faculty.tex}"
-
-clean:
-	rm -f *.log *.aux
