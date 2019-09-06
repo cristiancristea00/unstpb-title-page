@@ -1,0 +1,35 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[romanian]{babel}
+\usepackage{graphicx}
+\usepackage[margin=2.54cm]{geometry}
+
+\begin{document}
+\pagenumbering{gobble}
+\begin{titlepage}
+	\centering
+	\begin{tabular}{p{6cm}p{3.3cm}}
+		\includegraphics[width=0.2\textwidth]{img/upb.png} &
+		\includegraphics[width=0.2\textwidth]{img/fsim.png}
+	\end{tabular}
+	\vspace{1cm}
+
+	{\scshape\Large \textbf{Universitatea POLITEHNICA din București} \\}
+	{\scshape\Large \textbf{Facultatea de Știința și Ingineria Materialelor} \\}
+	\vspace{1.5cm}
+
+	{\scshape\large \docType \ pentru \subject\\}
+	\vspace{1.5cm}
+
+	{\Huge\bfseries \title\\}
+	\vspace{4cm}
+
+	{\Huge \firstName \ \lastName\\}
+	\vspace{0.2cm}
+	{\Large Grupa \group\\}
+	\vfill
+
+	{\Large\bfseries \textsc{București}\\
+		\vspace{0.2cm}
+		\the\year}
+\end{titlepage}
+\end{document}
