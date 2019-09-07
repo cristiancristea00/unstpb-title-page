@@ -2,6 +2,7 @@
 This LaTeX template may be used by students at [University POLITEHNICA of Bucharest](https://upb.ro/en/) (UPB) to generate a title page for their Project, Lab work, Report and other kinds of schoolwork. It offers the option to choose the faculty you are in and between two languages (Romanian and English).
 
 ## How to use
+
 - Open your Linux terminal and clone your repository to your machine
   ```
   git clone https://github.com/cristiancristea00/upb-title-page.git
@@ -21,7 +22,10 @@ This LaTeX template may be used by students at [University POLITEHNICA of Buchar
   ```
 
 ### Choices
-You will be greeted with the option to choose the faculty you are studying at. You just have to type the initials before the hyphen. After that you just have to enter the details of your paper.
+You will be greeted with the option to choose the faculty you are studying at. You just have to type the initials before the hyphen. After that you just have to enter the details of your paper. Now there should be a pdf in the working directory.
+
+###LaTeX
+On how to acquire and install LaTeX you can check out this [page](https://www.tug.org/texlive/quickinstall.html).
 
 ## How to contribute
 You have ideas how to improve this template?
