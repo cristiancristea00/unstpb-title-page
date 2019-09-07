@@ -64,3 +64,6 @@ facEN:
 	FSIM - Faculty of Material Science and Engineering
 	FSA - Faculty of Applied Sciences
 	FT - Faculty of Transports)
+
+clear:
+	@rm -f *.pdf
