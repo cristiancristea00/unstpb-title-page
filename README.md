@@ -10,7 +10,7 @@ This LaTeX template may be used by students at [University POLITEHNICA of Buchar
   ```
   cd upb-title-page
   ```
-- Execute make with the language as the parameter. <br />
+- Execute make with the language as the parameter. <br /> <br />
   For Romanian:
   ```
   make RO
