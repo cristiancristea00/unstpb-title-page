@@ -8,7 +8,7 @@ RO: selectRO
 
 selectRO: facRO
 	@read -p "Alege facultatea: " faculty;
-	@read -p "Tip: " docType;
+	@read -p "Tip (Proiect/Lucrare de laborator/...): " docType;
 	@read -p "Disciplină: " subject;
 	@read -p "Titlu: " title;
 	@read -p "Prenume: " firstName;
@@ -39,7 +39,7 @@ EN: selectEN
 
 selectEN: facEN
 	@read -p "Choose the faculty: " faculty;
-	@read -p "Type: " docType;
+	@read -p "Type (Project/Lab work/...): " docType;
 	@read -p "Subject: " subject;
 	@read -p "Title: " title;
 	@read -p "First name: " firstName;
