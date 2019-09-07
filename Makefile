@@ -38,14 +38,14 @@ EN: selectEN
 	@rm -f *.log *.aux
 
 selectEN: facEN
-	@read -p "Alege facultatea: " faculty;
-	@read -p "Tip: " docType;
-	@read -p "Disciplină: " subject;
-	@read -p "Titlu: " title;
-	@read -p "Prenume: " firstName;
-	@read -p "Nume: " lastName;
-	@read -p "Grupă: " group;
-	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/EN/$$faculty.tex}"
+	@read -p "Choose the faculty: " faculty;
+	@read -p "Type: " docType;
+	@read -p "Subject: " subject;
+	@read -p "Title: " title;
+	@read -p "First name: " firstName;
+	@read -p "LAst name: " lastName;
+	@read -p "Group: " group;
+	pdflatex -interaction=scrollmode --jobname="Title page" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/EN/$$faculty.tex}"
 
 facEN:
 	$(info Options:
@@ -64,4 +64,3 @@ facEN:
 	FSIM - Faculty of Material Science and Engineering
 	FSA - Faculty of Applied Sciences
 	FT - Faculty of Transports)
-
