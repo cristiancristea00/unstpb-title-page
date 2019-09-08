@@ -53,7 +53,7 @@ facEN:
 	FAC - Faculty of Automatic Control and Computers
 	FCASM - Faculty of Applied Chemistry and Materials Science
 	FETTI - Faculty of Electronics, Telecommunications and Information Technology
-	FE - Faculty of Aerospace Engineering
+	FE - Faculty of Power Engineering
 	FISB - Faculty of Biotechnical Systems Engineering
 	FIA - Faculty of Aerospace Engineering
 	FIE - Faculty of Electrical Engineering
