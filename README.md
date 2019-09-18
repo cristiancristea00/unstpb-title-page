@@ -28,7 +28,7 @@ You will be greeted with the option to choose the faculty you are studying at. Y
 On how to acquire and install LaTeX you can check out this [page](https://www.tug.org/texlive/quickinstall.html).
 
 ## Multiple students
-This script was designed with one student per paper in mind, so it doesn't offer the option to add multiple names. So here is workaround for those documents that require more students. When you are prompted to enter your first name, you follow the example below and leave empty the last name.
+This script was designed with one student per paper in mind, so it doesn't offer the option to add multiple names. So here is workaround for those documents that require more students. When you are prompted to enter your first name, you follow the example below (without the parentheses) and leave empty the last name.
   ```
   (Student1 First name) (Student1 Last name) \\\\ (Student2 First name) (Student2 Last name) \\\\ ... \\\\ (StudentN First name) (StudentN Last name)
   ```
