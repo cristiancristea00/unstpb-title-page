@@ -43,7 +43,7 @@ selectEN: facEN
 	@read -p "Subject: " subject;
 	@read -p "Title: " title;
 	@read -p "First name: " firstName;
-	@read -p "LAst name: " lastName;
+	@read -p "Last name: " lastName;
 	@read -p "Group: " group;
 	pdflatex -interaction=scrollmode --jobname="Title page" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/EN/$$faculty.tex}"
 
