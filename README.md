@@ -20,6 +20,14 @@ This LaTeX template may be used by students at [University POLITEHNICA of Buchar
   ```
   make EN
   ```
+  For French (only FILS students):
+  ```
+  make FR
+  ```
+  For German (only FILS students):
+  ```
+  make DE
+  ```
 
 ### Choices
 You will be greeted with the option to choose the faculty you are studying at. You just have to type the initials before the hyphen. After that you just have to enter the details of your paper. Now there should be a pdf in the working directory.

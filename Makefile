@@ -1,7 +1,7 @@
 .ONESHELL:
 error:
 	@echo "You haven't selected a language for the document!"
-	@echo "Usage: make RO/EN"
+	@echo "Usage: make RO/EN/FR/DE"
 
 RO: selectRO
 	@rm -f *.log *.aux
@@ -64,6 +64,30 @@ facEN:
 	FSIM - Faculty of Material Science and Engineering
 	FSA - Faculty of Applied Sciences
 	FT - Faculty of Transports)
+
+FR: selectFR
+	@rm -f *.log *.aux
+
+selectFR:
+	@read -p "Catégorie (Projet/Travail de labo/...): " docType;
+	@read -p "Matière: " subject;
+	@read -p "Titre: " title;
+	@read -p "Prénom: " firstName;
+	@read -p "Nom de famille: " lastName;
+	@read -p "Groupe: " group;
+	pdflatex -interaction=scrollmode --jobname="Page de titre" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/FR/FILS.tex}"
+
+DE: selectDE
+	@rm -f *.log *.aux
+
+selectDE:
+	@read -p "Art (Projekt/Laborarbeit/...): " docType;
+	@read -p "Fach: " subject;
+	@read -p "Titel: " title;
+	@read -p "Vorname: " firstName;
+	@read -p "Familienname: " lastName;
+	@read -p "Gruppe: " group;
+	pdflatex -interaction=scrollmode --jobname="Titelseite" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/DE/FILS.tex}"
 
 clear:
 	@rm -f *.pdf
