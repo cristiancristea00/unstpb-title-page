@@ -14,7 +14,7 @@ selectRO: facRO
 	@read -p "Prenume: " firstName;
 	@read -p "Nume: " lastName;
 	@read -p "Grupă: " group;
-	pdflatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/RO/$$faculty.tex}"
+	xelatex -interaction=scrollmode --jobname="Pagină de titlu" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/RO/$$faculty.tex}"
 
 facRO:
 	$(info Opțiuni:
@@ -45,7 +45,7 @@ selectEN: facEN
 	@read -p "First name: " firstName;
 	@read -p "Last name: " lastName;
 	@read -p "Group: " group;
-	pdflatex -interaction=scrollmode --jobname="Title page" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/EN/$$faculty.tex}"
+	xelatex -interaction=scrollmode --jobname="Title page" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/EN/$$faculty.tex}"
 
 facEN:
 	$(info Options:
@@ -75,7 +75,7 @@ selectFR:
 	@read -p "Prénom: " firstName;
 	@read -p "Nom de famille: " lastName;
 	@read -p "Groupe: " group;
-	pdflatex -interaction=scrollmode --jobname="Page de titre" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/FR/FILS.tex}"
+	xelatex -interaction=scrollmode --jobname="Page de titre" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/FR/FILS.tex}"
 
 DE: selectDE
 	@rm -f *.log *.aux
@@ -87,7 +87,7 @@ selectDE:
 	@read -p "Vorname: " firstName;
 	@read -p "Familienname: " lastName;
 	@read -p "Gruppe: " group;
-	pdflatex -interaction=scrollmode --jobname="Titelseite" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/DE/FILS.tex}"
+	xelatex -interaction=scrollmode --jobname="Titelseite" "\newcommand{\docType}{$$docType} \newcommand{\subject}{$$subject} \renewcommand{\title}{$$title} \newcommand{\firstName}{$$firstName} \newcommand{\lastName}{$$lastName} \newcommand{\group}{$$group} \input{./faculties/FILS/DE/FILS.tex}"
 
 clear:
 	@rm -f *.pdf
