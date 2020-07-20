@@ -1,13 +1,5 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[margin=2.54cm]{geometry}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{WorkSans}
-[
-	Path = ./WorkSans/,
-	UprightFont = WorkSans-Regular.ttf,
-	BoldFont = WorkSans-Bold.ttf
-]
+\input{./shared/packages.tex}
+\input{./shared/font.tex}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -21,21 +13,6 @@
 
 	{\scshape\Large \textbf{Universitatea POLITEHNICA din București} \\}
 	{\scshape\Large \textbf{Facultatea de Ingineria Sistemelor Biotehnice} \\}
-	\vspace{1.5cm}
-
-	{\scshape\large \docType \ pentru \subject\\}
-	\vspace{1.5cm}
-
-	{\Huge\bfseries \title\\}
-	\vspace{4cm}
-
-	{\Huge \firstName \ \lastName\\}
-	\vspace{0.2cm}
-	{\Large Grupa \group\\}
-	\vfill
-
-	{\Large\bfseries \textsc{București}\\
-		\vspace{0.2cm}
-		\the\year}
+	\input{./shared/infoRO.tex}
 \end{titlepage}
 \end{document}
