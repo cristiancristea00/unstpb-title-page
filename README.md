@@ -4,31 +4,21 @@ This LaTeX template may be used by students at [University POLITEHNICA of Buchar
 ## How to use
 
 - Open your Linux terminal and clone your repository to your machine
-  ```
+  ```bash
   git clone https://github.com/cristiancristea00/upb-title-page.git
   ```
 - Change the working directory to the one downloaded
-  ```
+  ```bash
   cd upb-title-page
   ```
-- Execute make with the language as the parameter. <br /> <br />
-  For Romanian:
+- Execute the following command to give execution permissions to the script
+  ```bash
+  sudo chmod +x create.oy
   ```
-  make RO
+- Now run the following for more information
+  ```bash
+  ./create.py --help
   ```
-  For English:
-  ```
-  make EN
-  ```
-  For French (only FILS students):
-  ```
-  make FR
-  ```
-  For German (only FILS students):
-  ```
-  make DE
-  ```
-
 ### Choices
 You will be greeted with the option to choose the faculty you are studying at. You just have to type the initials before the hyphen. After that you just have to enter the details of your paper. Now there should be a pdf in the working directory.
 
