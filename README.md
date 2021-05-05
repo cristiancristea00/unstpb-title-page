@@ -47,7 +47,7 @@ On how to acquire and install LaTeX and Python you can check out this [page](htt
 This script was designed with one student per paper in mind, so it doesn't offer the option to add multiple names. So here is workaround for those documents that require more students. When you are prompted to enter your first name, you follow the example below (without the parentheses) and leave empty the last name.
 
 ```bash
-(Student1 First name) (Student1 Last name) \\ (Student2 First name) (Student2 Last name) \\ ... \\ (StudentN First name) (StudentN Last name)
+(Student1 First name) (Student1 LAST NAME) \\ (Student2 First name) (Student2 LAST NAME) \\ ... \\ (StudentN First name) (StudentN LAST NAME)
 ```
 
 ## How to contribute
