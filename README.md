@@ -50,6 +50,10 @@ This script was designed with one student per paper in mind, so it doesn't offer
 (Student1 First name) (Student1 LAST NAME) \\ (Student2 First name) (Student2 LAST NAME) \\ ... \\ (StudentN First name) (StudentN LAST NAME)
 ```
 
+## Example document
+
+[![Example](https://raw.githubusercontent.com/cristiancristea00/upb-title-page/main/example/example.png)](https://github.com/cristiancristea00/upb-title-page/blob/main/example/example.pdf)
+
 ## How to contribute
 
 You have ideas how to improve this template?
