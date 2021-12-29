@@ -4,13 +4,15 @@ from os import remove
 from os.path import exists, join
 from subprocess import CalledProcessError, CompletedProcess, run
 from sys import stderr
-from typing import Dict, Tuple
+from typing import Tuple
 
 
 class OptionsGetter:
+    """Class to get options from command line."""
 
     def __init__(self):
-        self.arguments: Dict[str] = {}
+
+        self.arguments: dict[str] = {}
 
         self.description: str = 'Script that generates the PDF file based on the information provided by the user.'
         self.additional_information: str = 'The options available for the faculty parameter are:\n' \
@@ -34,7 +36,10 @@ class OptionsGetter:
                                               description=self.description, epilog=self.additional_information, )
 
     def parse_arguments(self):
-
+        """
+        Parses the command line arguments.
+        :return: None
+        """
         self.argument_parser.add_argument('-ni', '--non-interactive', action='store_false',
                                           help='Used if you want to input the details in an non-interactive manner\n'
                                                'by passing all the information to command line arguments')
@@ -55,20 +60,26 @@ class OptionsGetter:
         self.arguments = vars(self.argument_parser.parse_args())
 
     def process_arguments_or_input(self) -> Tuple[str, str, str, str, str, str, str, str]:
+        """
+        Processes the command line arguments or the user input.
+        :return: The processed arguments
+        """
         if not self.arguments['non_interactive']:
             for elem in self.arguments:
                 if self.arguments[elem] is None:
                     self.argument_parser.error(f'Argument {elem} is empty. Every argument is required if -ni is provided.')
-            return self.arguments['language'], self.arguments['faculty'], self.arguments['type'], self.arguments['subject'], \
-                   self.arguments['title'], self.arguments['first_name'], self.arguments['last_name'], self.arguments['group']
+            return (self.arguments['language'], self.arguments['faculty'], self.arguments['type'], self.arguments['subject'],
+                    self.arguments['title'], self.arguments['first_name'], self.arguments['last_name'], self.arguments['group'])
 
-        return input('Language: '), input('Faculty: '), input('Type: '), input('Subject: '), input('Title: '), input('First Name: '), \
-               input('Last Name: '), input('Group: ')
+        return (input('Language: '), input('Faculty: '), input('Type: '), input('Subject: '), input('Title: '), input('First Name: '),
+                input('Last Name: '), input('Group: '))
 
 
 class PDFGenerator:
+    """Class that generates the PDF file."""
 
     def __init__(self):
+
         self.program: str = R'xelatex'
         self.interaction: str = R'-interaction=nonstopmode'
         self.halt: str = R'-halt-on-error'
@@ -88,6 +99,11 @@ class PDFGenerator:
         self.aux_file: str = R'{}.aux'
 
     def get_options(self, options: Tuple[str, str, str, str, str, str, str, str]):
+        """
+        Gets the options from the command line arguments or the user input.
+        :param options: The options
+        :return: None
+        """
         self.template = self.template.format(join(join('faculties', options[0]), options[1] + '.tex'))
         self.document_type = self.document_type.format(options[2])
         self.subject = self.subject.format(options[3])
@@ -104,15 +120,27 @@ class PDFGenerator:
         self.name = options[4]
 
     def create_pdf(self) -> CompletedProcess:
+        """
+        Runs the process that generates the PDF file.
+        :return: None
+        """
         return run([self.program, self.halt, self.interaction, self.job_name, self.information], capture_output=True, check=True)
 
     def clean_files(self):
+        """
+        Cleans the auxiliary and log files.
+        :return: None
+        """
         if exists(self.log_file):
             remove(self.log_file)
         if exists(self.aux_file):
             remove(self.aux_file)
 
     def run(self):
+        """
+        Runs the program and cleans the files afterwards.
+        :return: None
+        """
         try:
             self.create_pdf()
             print(F'PDF creation completed successfully. Output written to: {self.name}.pdf')
@@ -125,6 +153,10 @@ class PDFGenerator:
 
 
 def main():
+    """
+    Main function.
+    :return: None
+    """
     options_getter = OptionsGetter()
     options_getter.parse_arguments()
     pdf_generator = PDFGenerator()
