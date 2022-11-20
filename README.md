@@ -10,25 +10,13 @@ This LaTeX template may be used by students at [University POLITEHNICA of Buchar
   git clone https://github.com/cristiancristea00/upb-title-page.git
   ```
 
-- Change the working directory to the one downloaded
+- Change the working directory to the cloned repository
 
   ```shell
   cd upb-title-page
   ```
 
-- Execute the following command to give execution permissions to the script for Unix-like system users
-
-  ```shell
-  sudo chmod +x create.py
-  ```
-
-- Now, for more information, run the following on Unix-like systems
-
-  ```shell
-  ./create.py --help
-  ```
-
-  or on Windows
+- Now, for more information, run the following command
 
   ```shell
   python create.py --help
@@ -46,7 +34,7 @@ On how to acquire and install LaTeX and Python you can check out this [page](htt
 
 This script was designed with one student per paper in mind, so it doesn't offer the option to add multiple names. So here is workaround for those documents that require more students. When you are prompted to enter your first name, you follow the example below (without the parentheses) and leave empty the last name.
 
-```bash
+```
 (Student1 First name) (Student1 LAST NAME) \\ (Student2 First name) (Student2 LAST NAME) \\ ... \\ (StudentN First name) (StudentN LAST NAME)
 ```
 

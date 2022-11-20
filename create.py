@@ -1,84 +1,112 @@
-#!/usr/bin/env python3
 from argparse import ArgumentParser, RawTextHelpFormatter
 from os import remove
 from os.path import exists, join
 from subprocess import CalledProcessError, CompletedProcess, run
 from sys import stderr
-from typing import Tuple
+from typing import Final
 
 
-class OptionsGetter:
-    """Class to get options from command line."""
+class DataCollector:
+    """
+    Class to get options from command line.
+    """
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Initializes the class.
+        """
 
-        self.arguments: dict[str] = {}
+        DESCRIPTION: Final[str] = 'Creates a PDF document using LaTeX for your university project.'
+        FACULTIES: Final[str] = 'The options available for the faculty parameter are:\n' \
+                                'FAIMA -> Faculty of Entrepreneurship, Business Engineering and Management\n' \
+                                'FAC   -> Faculty of Automatic Control and Computers\n' \
+                                'FICB  -> Faculty of Chemical Engineering and Biotechnologies\n' \
+                                'FETTI -> Faculty of Electronics, Telecommunications and Information Technology\n' \
+                                'FE    -> Faculty of Power Engineering\n' \
+                                'FISB  -> Faculty of Biotechnical Systems Engineering\n' \
+                                'FIA   -> Faculty of Aerospace Engineering\n' \
+                                'FIE   -> Faculty of Electrical Engineering\n' \
+                                'FIIR  -> Faculty of Industrial Engineering and Robotics\n' \
+                                'FILS  -> Faculty of Engineering in Foreign Languages\n' \
+                                'FIMM  -> Faculty of Mechanical Engineering and Mechatronics\n' \
+                                'FIM   -> Faculty of Medical Engineering\n' \
+                                'FSIM  -> Faculty of Material Science and Engineering\n' \
+                                'FSA   -> Faculty of Applied Sciences\n' \
+                                'FT    -> Faculty of Transports\n'
 
-        self.description: str = 'Script that generates the PDF file based on the information provided by the user.'
-        self.additional_information: str = 'The options available for the faculty parameter are:\n' \
-                                           'FAIMA - Faculty of Entrepreneurship, Business Engineering and Management\n' \
-                                           'FAC - Faculty of Automatic Control and Computers\n' \
-                                           'FCASM - Faculty of Applied Chemistry and Materials Science\n' \
-                                           'FETTI - Faculty of Electronics, Telecommunications and Information Technology\n' \
-                                           'FE - Faculty of Power Engineering\n' \
-                                           'FISB - Faculty of Biotechnical Systems Engineering\n' \
-                                           'FIA - Faculty of Aerospace Engineering\n' \
-                                           'FIE - Faculty of Electrical Engineering\n' \
-                                           'FIIR - Faculty of Industrial Engineering and Robotics\n' \
-                                           'FILS - Faculty of Engineering in Foreign Languages\n' \
-                                           'FIMM - Faculty of Mechanical Engineering and Mechatronics\n' \
-                                           'FIM - Faculty of Medical Engineering\n' \
-                                           'FSIM - Faculty of Material Science and Engineering\n' \
-                                           'FSA - Faculty of Applied Sciences\n' \
-                                           'FT - Faculty of Transports\n'
+        self.__parser = ArgumentParser(allow_abbrev=False, formatter_class=RawTextHelpFormatter, description=DESCRIPTION, epilog=FACULTIES)
 
-        self.argument_parser = ArgumentParser(allow_abbrev=False, formatter_class=RawTextHelpFormatter,
-                                              description=self.description, epilog=self.additional_information, )
+        self.__parser.add_argument('-al', '--arg-like', action='store_false',
+                                   help='Use it if you want to pass the data to arguments instead of live input')
 
-    def parse_arguments(self):
+        self.__parser.add_argument('-l', '--language', choices=['RO', 'EN', 'FR', 'DE'], type=str,
+                                   help='One of the four languages: RO/EN for everyone and FR/DE just for FILS students')
+
+        self.__parser.add_argument('-f', '--faculty', type=str,
+                                   help='The faculty at which you are enrolled (the initials provided below)')
+
+        self.__parser.add_argument('-t', '--type', type=str,
+                                   help='The document type (e.g. Project/Lab work/...)')
+
+        self.__parser.add_argument('-s', '--subject', type=str,
+                                   help='The university subject (e.g. Calculus/Algebra/...)')
+
+        self.__parser.add_argument('-ti', '--title', type=str,
+                                   help='The title of the document')
+
+        self.__parser.add_argument('-fn', '--first-name', type=str,
+                                   help='Your first name')
+
+        self.__parser.add_argument('-ln', '--last-name', type=str,
+                                   help='Your last name')
+
+        self.__parser.add_argument('-g', '--group', type=str,
+                                   help='The group you belong to')
+
+        self.__parser._actions[0].help = 'Show this help message and exit'
+
+        self.__arguments: dict[str] = {}
+
+    def __parse_arguments(self) -> None:
         """
         Parses the command line arguments.
-        :return: None
         """
-        self.argument_parser.add_argument('-ni', '--non-interactive', action='store_false',
-                                          help='Used if you want to input the details in an non-interactive manner\n'
-                                               'by passing all the information to command line arguments')
-        self.argument_parser.add_argument('-l', '--language', choices=['RO', 'EN', 'FR', 'DE'], metavar='',
-                                          type=str,
-                                          help='One of the four languages: RO/EN and FR/DE just for FILS students')
-        self.argument_parser.add_argument('-f', '--faculty', metavar='', type=str,
-                                          help='The faculty at which you are a student (the initials provided below)')
-        self.argument_parser.add_argument('-t', '--type', metavar='', type=str,
-                                          help='The document type (e.g. Project/Lab work/...)')
-        self.argument_parser.add_argument('-s', '--subject', metavar='', type=str,
-                                          help='The university subject in question')
-        self.argument_parser.add_argument('-ti', '--title', metavar='', type=str,
-                                          help='The title of the document')
-        self.argument_parser.add_argument('-fn', '--first-name', metavar='', type=str, help='Your first name')
-        self.argument_parser.add_argument('-ln', '--last-name', metavar='', type=str, help='Your last name')
-        self.argument_parser.add_argument('-g', '--group', metavar='', type=str, help='The group you belong to')
-        self.arguments = vars(self.argument_parser.parse_args())
 
-    def process_arguments_or_input(self) -> Tuple[str, str, str, str, str, str, str, str]:
-        """
-        Processes the command line arguments or the user input.
-        :return: The processed arguments
-        """
-        if not self.arguments['non_interactive']:
-            for elem in self.arguments:
-                if self.arguments[elem] is None:
-                    self.argument_parser.error(f'Argument {elem} is empty. Every argument is required if -ni is provided.')
-            return (self.arguments['language'], self.arguments['faculty'], self.arguments['type'], self.arguments['subject'],
-                    self.arguments['title'], self.arguments['first_name'], self.arguments['last_name'], self.arguments['group'])
+        self.__arguments = vars(self.__parser.parse_args())
 
-        return (input('Language: '), input('Faculty: '), input('Type: '), input('Subject: '), input('Title: '), input('First Name: '),
-                input('Last Name: '), input('Group: '))
+    def process_options(self) -> tuple[str, str, str, str, str, str, str, str]:
+        """
+        Processes the arguments or inputs the information from the user.
+
+        Returns:
+            tuple[str, str, str, str, str, str, str, str]: The processed information
+        """
+
+        self.__parse_arguments()
+
+        if not self.__arguments['arg_like']:
+
+            for elem in self.__arguments:
+
+                if self.__arguments[elem] is None:
+
+                    self.__parser.error(f'Argument {elem} is empty. Every argument is required if -ni is provided.')
+
+            return (self.__arguments['language'], self.__arguments['faculty'], self.__arguments['type'], self.__arguments['subject'],
+                    self.__arguments['title'], self.__arguments['first_name'], self.__arguments['last_name'], self.__arguments['group'])
+
+        else:
+
+            return (input('Language: '), input('Faculty: '), input('Type: '), input('Subject: '),
+                    input('Title: '), input('First Name: '), input('Last Name: '), input('Group: '))
 
 
 class PDFGenerator:
-    """Class that generates the PDF file."""
+    """
+    Class that generates the PDF file.
+    """
 
-    def __init__(self):
+    def __init__(self, options: tuple[str, str, str, str, str, str, str, str]) -> None:
 
         self.program: str = R'xelatex'
         self.interaction: str = R'-interaction=nonstopmode'
@@ -98,12 +126,16 @@ class PDFGenerator:
         self.log_file: str = R'{}.log'
         self.aux_file: str = R'{}.aux'
 
-    def get_options(self, options: Tuple[str, str, str, str, str, str, str, str]):
+        self.__process_options(options)
+
+    def __process_options(self, options: tuple[str, str, str, str, str, str, str, str]) -> None:
         """
-        Gets the options from the command line arguments or the user input.
-        :param options: The options
-        :return: None
+        Processes the options.
+
+        Args:
+            options (tuple[str, str, str, str, str, str, str, str]): The options provided by the user
         """
+
         self.template = self.template.format(join(join('faculties', options[0]), options[1] + '.tex'))
         self.document_type = self.document_type.format(options[2])
         self.subject = self.subject.format(options[3])
@@ -119,48 +151,58 @@ class PDFGenerator:
         self.aux_file = self.aux_file.format(options[4])
         self.name = options[4]
 
-    def create_pdf(self) -> CompletedProcess:
+    def __create_pdf(self) -> CompletedProcess:
         """
-        Runs the process that generates the PDF file.
-        :return: None
+        Creates the PDF file.
+
+        Returns:
+            CompletedProcess: The process that was executed
         """
+
         return run([self.program, self.halt, self.interaction, self.job_name, self.information], capture_output=True, check=True)
 
-    def clean_files(self):
+    def __clean_files(self) -> None:
         """
-        Cleans the auxiliary and log files.
-        :return: None
+        Cleans the unnecessary files after the PDF file was created.
         """
+
         if exists(self.log_file):
+
             remove(self.log_file)
+
         if exists(self.aux_file):
+
             remove(self.aux_file)
 
-    def run(self):
+    def run(self) -> None:
         """
-        Runs the program and cleans the files afterwards.
-        :return: None
+        Runs the program.
         """
+
         try:
-            self.create_pdf()
+
+            self.__create_pdf()
             print(F'PDF creation completed successfully. Output written to: {self.name}.pdf')
+
         except CalledProcessError as error:
+
             print(F'PDF creation failed with exit code {error.returncode}. Maybe you provided an invalid language or '
                   F'faculty. Check the output for more information.', '-' * 80, error.output, '-' * 80, sep='\n', file=stderr)
+
             raise
+
         finally:
-            self.clean_files()
+
+            self.__clean_files()
 
 
-def main():
+def main() -> None:
     """
-    Main function.
-    :return: None
+    The main function.
     """
-    options_getter = OptionsGetter()
-    options_getter.parse_arguments()
-    pdf_generator = PDFGenerator()
-    pdf_generator.get_options(options_getter.process_arguments_or_input())
+
+    data_collector = DataCollector()
+    pdf_generator = PDFGenerator(data_collector.process_options())
     pdf_generator.run()
 
 
