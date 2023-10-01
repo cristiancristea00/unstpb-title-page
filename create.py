@@ -90,7 +90,7 @@ class DataCollector:
 
                 if self.__arguments[elem] is None:
 
-                    self.__parser.error(f'Argument {elem} is empty. Every argument is required if -ni is provided.')
+                    self.__parser.error(f'Argument {elem} is empty. Every argument is required if you use the -al/--arg-like option.')
 
             return (self.__arguments['language'], self.__arguments['faculty'], self.__arguments['type'], self.__arguments['subject'],
                     self.__arguments['title'], self.__arguments['first_name'], self.__arguments['last_name'], self.__arguments['group'])

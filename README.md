@@ -1,19 +1,19 @@
-# Title page in LaTeX for UPB students
+# Title page in LaTeX for UNSTPB students
 
-This LaTeX template may be used by students at [University POLITEHNICA of Bucharest](https://upb.ro/en/) (UPB) to generate a title page for their Project, Lab work, Report and other kinds of schoolwork. It offers the option to choose the faculty you are in and between four languages (Romanian and English for all students and French and German for FILS students).
+This LaTeX template may be used by students at [National University of Science and Technology POLITEHNICA Bucharest](https://upb.ro/en/) (UNSTPB) to generate a title page for their Project, Lab work, Report and other kinds of schoolwork. It offers the option to choose the faculty you are in and between four languages (Romanian and English for all students and French and German for FILS students).
 
 ## How to use
 
 - Open your Linux terminal and clone your repository to your machine
 
   ```shell
-  git clone https://github.com/cristiancristea00/upb-title-page.git
+  git clone https://github.com/cristiancristea00/unstpb-title-page.git
   ```
 
 - Change the working directory to the cloned repository
 
   ```shell
-  cd upb-title-page
+  cd unstpb-title-page
   ```
 
 - Now, for more information, run the following command
@@ -40,7 +40,7 @@ This script was designed with one student per paper in mind, so it doesn't offer
 
 ## Example document
 
-[![Example](https://raw.githubusercontent.com/cristiancristea00/upb-title-page/main/example/example.png)](https://github.com/cristiancristea00/upb-title-page/blob/main/example/example.pdf)
+[![Example](https://raw.githubusercontent.com/cristiancristea00/unstpb-title-page/main/example/example.png)](https://github.com/cristiancristea00/unstpb-title-page/blob/main/example/example.pdf)
 
 ## How to contribute
 
@@ -48,4 +48,4 @@ You have ideas how to improve this template?
 Or found any problems?
 
 - [Fork the repository](https://help.github.com/articles/fork-a-repo/) and create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
-- Report an [issue](https://github.com/cristiancristea00/upb-title-page/issues).
+- Report an [issue](https://github.com/cristiancristea00/unstpb-title-page/issues).
